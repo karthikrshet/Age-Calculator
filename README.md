@@ -42,9 +42,3 @@ A modern, interactive **Age Calculator** built with **HTML, CSS, and JavaScript*
 * 📆 Show **age in months & days**
 
 ---
-
-Would you like me to **make a full polished README** with:
-
-* Badges (HTML, CSS, JS)
-* Screenshot section
-* Live demo link (GitHub Pages)
