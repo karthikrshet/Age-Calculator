@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: "Montserrat", sans-serif; }
+    body {
+      background: linear-gradient(135deg, #74ABE2, #5563DE);
+      min-height: 100vh;
+      display: flex; 
+      flex-direction: column;
+      justify-content: center; 
+      align-items: center;
+      transition: background 0.4s ease;
+    }
+    .container {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(15px);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    h1 {
+      color: #fff;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    label {
+      color: #fff;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    input {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    button {
+      color: white;
+      background: #ff7b54;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.2s, background 0.3s;
+    }
+    button:hover {
+      background: #ff5722;
+      transform: scale(1.05);
+    }
+    #result {
+      margin-top: 20px;
+      color: #fff;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 40px;
+      color: #fff;
+      font-size: 18px;
+      text-align: center;
+    }
+    footer strong {
+      color: #ffdd57;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    footer strong:hover {
+      color: #fff;
+    }
+    .theme-toggle {
+      margin-top: 15px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      text-decoration: underline;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Age Calculator</h1>
+    <label for="dob">Enter your date of birth</label>
+    <input type="date" id="dob">
+    <button id="btn">Calculate Age</button>
+    <p id="result">You are x years old</p>
+    <div class="theme-toggle" id="toggleTheme">Switch Theme</div>
+  </div>
+  <footer>
+    Developed by <strong>Karthik Shet</strong>
+  </footer>
+
+  <script>
+    const btnEl = document.getElementById("btn");
+    const dobEl = document.getElementById("dob");
+    const resEl = document.getElementById("result");
+    const themeToggle = document.getElementById("toggleTheme");
+    let darkMode = false;
+
+    function calculateAge(){
+      const bdayValue = dobEl.value; 
+      if(bdayValue===""){
+          alert("Please enter your birthday!");
+      } else {
+          const age = getAge(bdayValue);
+          animateAge(0, age);
+      }
+    }
+
+    function getAge(bdayValue){
+      const currentDate = new Date();
+      const bdayDate = new Date(bdayValue);
+      let yearDiff = currentDate.getFullYear()-bdayDate.getFullYear();
+      const monthDiff = currentDate.getMonth()-bdayDate.getMonth();
+      if(monthDiff<0||(monthDiff===0 && currentDate.getDate()<bdayDate.getDate())){
+          yearDiff--;
+      }
+      return yearDiff;
+    }
+
+    // Animate age counter
+    function animateAge(start, end){
+      let current = start;
+      const step = end > start ? 1 : -1;
+      const interval = setInterval(() => {
+        current += step;
+        resEl.innerText = `Your age is ${current} ${current>1? "years": "year"} old`;
+        if(current === end) clearInterval(interval);
+      }, 40);
+    }
+
+    // Theme Toggle
+    themeToggle.addEventListener("click", () => {
+      darkMode = !darkMode;
+      document.body.style.background = darkMode 
+        ? "linear-gradient(135deg, #1f1f1f, #3a3a3a)" 
+        : "linear-gradient(135deg, #74ABE2, #5563DE)";
+    });
+
+    btnEl.addEventListener("click",calculateAge);
+  </script>
+</body>
+</html>
