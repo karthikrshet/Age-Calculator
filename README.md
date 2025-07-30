@@ -1,8 +1,4 @@
 # Age-Calculator
-Here’s an **updated GitHub description** for your **new trendy Age Calculator**:
-
----
-
 ### **Trendy Age Calculator Web App**
 
 A modern, interactive **Age Calculator** built with **HTML, CSS, and JavaScript**, featuring a **glassmorphism UI**, **animated counter**, and **dark/light mode** toggle.
